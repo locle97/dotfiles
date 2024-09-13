@@ -1,5 +1,5 @@
 theme "catppuccin-macchiato"
-default_layout "default"
+default_layout "compact"
 on_force_close "quit"
 pane_frames false
 
