@@ -49,6 +49,7 @@ window#waybar {
 #cpu,
 #temperature,
 #custom-weather,
+#custom-power,
 #idle_inhibitor,
 #jack,
 #tray,

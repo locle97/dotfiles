@@ -4,7 +4,7 @@
      // "custom/weather", 
   "disk", "memory", "cpu", "temperature", "custom/powerDraw", "hyprland/window" ],
   "modules-center": [  "hyprland/workspaces"],
-  "modules-right": ["tray",  "custom/clipboard", "backlight", "pulseaudio", "network", "battery" ],
+  "modules-right": ["tray",  "custom/clipboard", "backlight", "pulseaudio", "network", "battery", "custom/power" ],
   "reload_style_on_change":true,
 
   "custom/logo": {
@@ -213,7 +213,12 @@
     "interval": 1,
     "exec": "~/.config/waybar/scripts/powerdraw.sh",
     "return-type": "json"
-  }
+  },
+  "custom/power": {
+        "format" : "⏻ ",
+		"tooltip": false,
+		"on-click": "wlogout"
+    }
 
 }
 
