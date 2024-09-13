@@ -1,4 +1,4 @@
-theme "catppuccin-mocha"
+theme "catppuccin-macchiato"
 default_layout "default"
 on_force_close "quit"
 pane_frames false
@@ -128,7 +128,7 @@ keybinds clear-defaults=true{
         bind "%" { NewPane "Right"; SwitchToMode "Normal"; }
         bind "z" { ToggleFocusFullscreen; SwitchToMode "Normal"; }
         bind "c" { NewTab; SwitchToMode "Normal"; }
-        bind "," { SwitchToMode "RenameTab"; }
+        bind "," { SwitchToMode "RenameTab"; TabNameInput 0; }
         bind "p" { GoToPreviousTab; SwitchToMode "Normal"; }
         bind "n" { GoToNextTab; SwitchToMode "Normal"; }
         bind "Left" { MoveFocus "Left"; SwitchToMode "Normal"; }
@@ -143,6 +143,13 @@ keybinds clear-defaults=true{
         bind "d" { Detach; }
         bind "Space" { NextSwapLayout; }
         bind "x" { CloseFocus; SwitchToMode "Normal"; }
+        bind "s" {
+            LaunchOrFocusPlugin "zellij:session-manager" {
+                floating true
+                move_to_focused_tab true
+            };
+            SwitchToMode "Normal"
+        }
     }
     shared_except "locked" {
         bind "Alt g" { SwitchToMode "Locked"; }
@@ -179,6 +186,6 @@ keybinds clear-defaults=true{
         bind "Alt m" { SwitchToMode "Move"; }
     }
     shared_except "tmux" "locked" {
-        bind "Alt b" { SwitchToMode "Tmux"; }
+        bind "Ctrl Space" { SwitchToMode "Tmux"; }
     }
 }
