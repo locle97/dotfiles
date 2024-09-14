@@ -155,10 +155,12 @@ keybinds clear-defaults=true{
         bind "Alt g" { SwitchToMode "Locked"; }
         bind "Alt q" { Quit; }
         bind "Alt n" { NewPane; }
-        bind "Ctrl h" "Alt h" { MoveFocusOrTab "Left"; }
-        bind "Ctrl l" "Alt l" { MoveFocusOrTab "Right"; }
-        bind "Ctrl j" "Alt j" { MoveFocus "Down"; }
-        bind "Ctrl k" "Alt k" { MoveFocus "Up"; }
+        bind "Ctrl h" { MoveFocus "Left"; }
+        bind "Ctrl l" { MoveFocus "Right"; }
+        bind "Alt l" { GoToNextTab; }
+        bind "Alt h" { GoToPreviousTab; }
+        bind "Ctrl j" { MoveFocus "Down"; }
+        bind "Ctrl k" { MoveFocus "Up"; }
         bind "Alt =" "Alt +" { Resize "Increase"; }
         bind "Alt -" { Resize "Decrease"; }
         bind "Alt [" { PreviousSwapLayout; }
