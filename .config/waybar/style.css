@@ -64,8 +64,6 @@ window#waybar {
     padding-top: 0px;
 }
 
-}
-
 #temperature.critical,
 #pulseaudio.muted {
     color: #FF0000;
