@@ -1,10 +1,8 @@
 {
   "layer": "top", "position": "top",
-  "modules-left": ["custom/logo", "clock",  
-     // "custom/weather", 
-  "disk", "memory", "cpu", "temperature", "custom/powerDraw", "hyprland/window" ],
-  "modules-center": [  "hyprland/workspaces"],
-  "modules-right": ["tray",  "custom/clipboard", "backlight", "pulseaudio", "network", "battery", "custom/power" ],
+  "modules-left": ["hyprland/workspaces"],
+  "modules-center": [ "custom/logo", "clock" ],
+  "modules-right": ["hyprland/window", "cpu", "memory", "disk", "temperature", "tray",  "custom/clipboard", "backlight", "pulseaudio", "network", "battery", "custom/power" ],
   "reload_style_on_change":true,
 
   "custom/logo": {

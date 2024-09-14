@@ -5,6 +5,7 @@
     font-size: 14px;
     font-family: "SauceCodePro Nerd Font,SauceCodePro NF" ;
     min-height: 25px;
+    color: white;
 }
 
 window#waybar {
