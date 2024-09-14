@@ -128,7 +128,7 @@
     "interval": 30,
     "format": "  {percentage_used}%",
     "path": "/"
-    "tooltip-format": "{used} out of {total} used ({percentage_used}%)",
+    "tooltip-format": "{used} out of {total} used ({percentage_used}%)"
   },
 
   "custom/colorpicker": {
