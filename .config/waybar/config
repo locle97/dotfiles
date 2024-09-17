@@ -13,7 +13,7 @@
   "hyprland/workspaces": {
 	"format": "{icon}",
 	"format-icons": {
-		"1": "󰣇",
+		"1": "󰇥",
 		"2": "",
 		"3": "",
 		"4": "",
@@ -51,7 +51,7 @@
 
 
 "clock": {
-      "format": "{:%H:%M:%S %p}",
+      "format": "{:%d-%m-%Y %H:%M:%S %p}",
       "interval":1,
       "tooltip-format": "\n<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
       "calendar-weeks-pos": "right",
