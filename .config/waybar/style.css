@@ -1,103 +1,129 @@
 @import "mocha.css";
 
 * {
-    border: none;
-    font-size: 14px;
     font-family: "SauceCodePro Nerd Font,SauceCodePro NF";
-    min-height: 25px;
-    color: white;
+    font-size: 15px;
+    min-height: 0;
 }
 
-window#waybar {
+#waybar {
     background: transparent;
+    color: @text;
+    margin: 5px 5px;
+}
+
+#workspaces {
+    border-radius: 1rem;
     margin: 5px;
+    background-color: @surface0A;
+    margin-left: 1rem;
 }
 
-#custom-logo {
-    padding: 0 10px;
+#workspaces button {
+    color: @lavender;
+    border-radius: 1rem;
+    padding: 0.4rem 0.6rem;
 }
 
-.modules-right {
-    padding-left: 5px;
-    border-radius: 15px 0 0 15px;
-    margin-top: 2px;
-    background: rgba(0, 0, 0, 0.7);
+#workspaces button.active {
+    color: @sky;
+    border-radius: 1rem;
 }
 
-.modules-center {
-    padding: 0 15px;
-    margin-top: 2px;
-    border-radius: 15px 15px 15px 15px;
-    background: rgba(0, 0, 0, 0.7);
+#workspaces button:hover {
+    color: @sapphire;
+    border-radius: 1rem;
 }
 
-.modules-left {
-    border-radius: 0 15px 15px 0;
-    margin-top: 2px;
-    background: rgba(0, 0, 0, 0.7);
-}
-
-#battery,
-#custom-clipboard,
-#custom-colorpicker,
-#custom-powerDraw,
-#bluetooth,
-#pulseaudio,
-#network,
-#disk,
-#memory,
-#backlight,
-#cpu,
-#temperature,
-#custom-weather,
-#custom-power,
-#idle_inhibitor,
-#jack,
+#custom-music,
 #tray,
+#backlight,
+#clock,
+#battery,
+#pulseaudio,
+#custom-lock,
+#custom-logo,
+#memory,
+#disk,
+#temperature,
+#network,
+#cpu,
 #window,
-#workspaces,
-#clock {
-    padding: 0 5px;
-}
-
-#pulseaudio {
-    padding-top: 0px;
-}
-
-#temperature.critical,
-#pulseaudio.muted {
-    color: #FF0000;
-    padding-top: 0;
+#custom-power {
+    background-color: @surface0A;
+    padding: 0.4rem 0.6rem;
+    margin: 5px 0;
 }
 
 #clock {
-    color: #5fd1fa;
+    color: @blue;
+    border-radius: 0px 1rem 1rem 0px;
+    margin-right: 1rem;
+}
+
+#battery {
+    color: @green;
 }
 
 #battery.charging {
-    color: #ffffff;
-    background-color: #26A65B;
+    color: @green;
 }
 
 #battery.warning:not(.charging) {
-    background-color: #ffbe61;
-    color: black;
+    color: @red;
 }
 
-#battery.critical:not(.charging) {
-    background-color: #f53c3c;
-    color: #ffffff;
-    animation-name: blink;
-    animation-duration: 0.5s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
+#backlight {
+    color: @yellow;
 }
 
+#backlight,
+#battery {
+    border-radius: 0;
+}
 
-@keyframes blink {
-    to {
-        background-color: #ffffff;
-        color: #000000;
-    }
+#custom-logo {
+    border-radius: 1rem 0px 0px 1rem;
+    margin-left: 1rem;
+}
+
+#window {
+    color: @maroon;
+    border-radius: 1rem 0px 0px 1rem;
+    margin-left: 1rem;
+}
+
+#pulseaudio {
+    color: @peach;
+}
+
+#cpu {
+    color: @yellow;
+}
+
+#memory {
+    color: @green;
+}
+
+#disk {
+    color: @sky;
+}
+
+#temperature {
+    color: @red;
+}
+
+#network {
+    color: @pink;
+}
+
+#custom-power {
+    margin-right: 1rem;
+    border-radius: 0px 1rem 1rem 0px;
+    color: @red;
+}
+
+#tray {
+    margin-right: 1rem;
+    border-radius: 1rem;
 }

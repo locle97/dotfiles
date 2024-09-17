@@ -2,7 +2,7 @@
   "layer": "top", "position": "top",
   "modules-left": ["hyprland/workspaces"],
   "modules-center": [ "custom/logo", "clock" ],
-  "modules-right": ["hyprland/window", "cpu", "memory", "disk", "temperature", "tray",  "custom/clipboard", "backlight", "pulseaudio", "network", "battery", "custom/power" ],
+  "modules-right": ["hyprland/window", "temperature", "pulseaudio", "cpu", "memory", "disk", "backlight", "network", "battery", "custom/power" ],
   "reload_style_on_change":true,
 
   "custom/logo": {
