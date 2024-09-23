@@ -1,23 +1,4 @@
 return {
-    {
-        "zbirenbaum/copilot-cmp",
-        event = { "InsertEnter", "LspAttach" },
-        fix_pairs = true,
-        config = function()
-            require("copilot_cmp").setup()
-        end,
-    },
-    {
-        "zbirenbaum/copilot.lua",
-        cmd = "Copilot",
-        event = "InsertEnter",
-        config = function()
-            require("copilot").setup {
-                suggestion = { enabled = false },
-                panel = { enabled = false },
-            }
-        end,
-    },
     { "neo4j-contrib/cypher-vim-syntax", event = "BufEnter" },
     {
         "echasnovski/mini.nvim",
