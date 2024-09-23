@@ -4,7 +4,7 @@ require("nvchad.configs.lspconfig").defaults()
 local lspconfig = require "lspconfig"
 
 -- EXAMPLE
-local servers = { "html", "cssls", "omnisharp", "jsonls", "pylsp" }
+local servers = { "emmet_language_server", "ts_ls", "html", "cssls", "omnisharp", "jsonls", "pylsp" }
 local nvlsp = require "nvchad.configs.lspconfig"
 
 -- lsps with default config
@@ -15,13 +15,6 @@ for _, lsp in ipairs(servers) do
     capabilities = nvlsp.capabilities,
   }
 end
-
--- configuring single server, example: typescript
-lspconfig.ts_ls.setup {
-  on_attach = nvlsp.on_attach,
-  on_init = nvlsp.on_init,
-  capabilities = nvlsp.capabilities,
-}
 
 local pid = vim.fn.getpid()
 local util = require "lspconfig/util"
@@ -37,5 +30,3 @@ lspconfig.omnisharp.setup {
   },
   root_dir = util.root_pattern("*.sln", "*.csproj"),
 }
-
-lspconfig.emmet_language_server.setup{}
