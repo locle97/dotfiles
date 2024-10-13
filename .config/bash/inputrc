@@ -45,4 +45,3 @@ export GTK_IM_MODULE=fcitx
 export QT_IM_MODULE=fcitx
 export XMODIFIERS=@im=fcitx
 
-bind -x '"\C-f":sesh connect $(sesh list | fzf)'
