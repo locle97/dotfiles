@@ -10,6 +10,7 @@ HISTFILESIZE="${HISTSIZE}"
 
 # Set complete path
 export PATH="./bin:$HOME/.local/bin:$HOME/.local/share/omakub/bin:$PATH:$HOME/.dotnet/tools"
+export PATH="$PATH:$HOME/.cargo/bin"
 set +h
 
 export OMAKUB_PATH="/home/$USER/.local/share/omakub"
