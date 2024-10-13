@@ -38,4 +38,4 @@ webm2mp4() {
   ffmpeg -i "$input_file" -c:v libx264 -preset slow -crf 22 -c:a aac -b:a 192k "$output_file"
 }
 
-bind -x '"\C-r":sesh connect $(sesh list | fzf)'
+bind -x '"\C-r":sesh connect $(sesh list | fzf --height 70% --reverse --border-label " sesh " --border)'
