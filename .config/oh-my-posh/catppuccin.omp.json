@@ -51,12 +51,6 @@
                     "template": "{{ .HEAD }} ",
                     "style": "plain",
                     "type": "git"
-                },
-                {
-                    "style": "plain",
-                    "foreground": "p:closer",
-                    "template": "\uf105",
-                    "type": "text"
                 }
             ],
             "type": "prompt"
