@@ -9,11 +9,12 @@ HISTFILESIZE="${HISTSIZE}"
     . /usr/share/bash-completion/bash_completion
 
 # Set complete path
-export PATH="./bin:$HOME/.local/bin:$HOME/.local/share/omakub/bin:$PATH:$HOME/.dotnet/tools"
+export PATH="./bin:$HOME/.local/bin:$PATH:$HOME/.dotnet/tools"
 export PATH="$PATH:$HOME/.cargo/bin"
 set +h
-
-export OMAKUB_PATH="/home/$USER/.local/share/omakub"
+export PATH="$PATH:$HOME/.local/scripts"
+export PATH="$PATH:/opt/nvim-linux64/bin"
+export PATH="$PATH:/usr/local/go/bin"
 
 eval "$(oh-my-posh init bash --config ~/.config/oh-my-posh/catppuccin.omp.json)"
 
