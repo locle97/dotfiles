@@ -3,6 +3,7 @@ set -U fish_complete_case_insensitive 1
 set -U fish_history
 set -x HISTSIZE 32768
 set -x HISTFILESIZE $HISTSIZE
+set fish_greeting
 
 # Path settings
 set -x PATH $HOME/.local/bin $PATH $HOME/.dotnet/tools
