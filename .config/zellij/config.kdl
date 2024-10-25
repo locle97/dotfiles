@@ -2,6 +2,7 @@ theme "catppuccin-macchiato"
 default_layout "disable-status-bar"
 on_force_close "quit"
 pane_frames false
+default_shell "fish"
 
 keybinds clear-defaults=true{
     normal {
