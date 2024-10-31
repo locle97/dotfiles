@@ -26,4 +26,6 @@ alias gcm 'git commit -m'
 alias gcam 'git commit -a -m'
 alias gcad 'git commit -a --amend'
 
+# Tmux
+alias tm 'tmuxifier'
 bind \cf 'tmux-sessionizer'
