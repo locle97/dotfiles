@@ -10,7 +10,7 @@ else
         -not -path "*/cache/*" \
         -not -path "*/.angular/*" \
         -not -path "*/env/*" \
-        -not -path "*/obj/*" | fzf --preview 'ls -l {}')
+        -not -path "*/obj/*" | fzf)
 end
 
 # Exit if no folder is selected
