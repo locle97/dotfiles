@@ -4,7 +4,13 @@ if test (count $argv) -eq 1
     set selected $argv[1]
 else
     # Search for directories in ~/code (customize paths as needed)
-    set selected (find ~/Coding ~/.config -type d -not -path "*/.git/*" -not -path "*/node_modules/*" -not -path "*/bin/*" -not -path "*/obj/*" | fzf --preview 'ls -l {}')
+    set selected (find ~/Coding ~/dotfiles -type d -not -path "*/.git/*" \
+        -not -path "*/node_modules/*" \
+        -not -path "*/bin/*" \
+        -not -path "*/cache/*" \
+        -not -path "*/.angular/*" \
+        -not -path "*/env/*" \
+        -not -path "*/obj/*" | fzf --preview 'ls -l {}')
 end
 
 # Exit if no folder is selected
