@@ -3,5 +3,6 @@ if status is-interactive
     source ~/.config/fish/shell.fish
     source ~/.config/fish/init.fish
     source ~/.config/fish/aliases.fish
+    source ~/.secrets
 end
 
