@@ -26,17 +26,17 @@ set tmux_running (pgrep tmux)
 
 # If not in tmux and tmux isn't running, create a new session with two windows
 if test -z "$TMUX" -a -z "$tmux_running"
-    tmux new-session -s $selected_name -c $selected -n "editor"
-    tmux new-window -t "$selected_name:" -n "shell" -c "$selected"
-    tmux select-window -t "$selected_name:0"
+    tmux new-session -s $selected_name -c $selected -n "editor"\; \
+        new-window -t "$selected_name" -c $selected -n "shell"\; \
+        select-window -t "$selected_name:1"
     exit 0
 end
 
 # If session doesn't exist, create it in detached mode with two windows
 if not tmux has-session -t=$selected_name 2>/dev/null
     tmux new-session -ds $selected_name -c $selected -n "editor"
-    tmux new-window -t "$selected_name:" -n "shell" -c "$selected"
-    tmux select-window -t "$selected_name:0"
+    tmux new-window -t "$selected_name" -c $selected -n "shell"
+    tmux select-window -t "$selected_name:1"
 end
 
 # Switch to the session (or attach if not in tmux)
