@@ -11,6 +11,7 @@ set -x PATH $HOME/.local/bin $PATH $HOME/.dotnet/tools
 set -x PATH $PATH $HOME/.cargo/bin
 set -x PATH $PATH $HOME/.local/scripts
 set -x PATH $PATH /opt/nvim-linux64/bin
+set -x PATH $PATH /opt/nvim-linux-x86_64/bin
 set -x PATH $PATH /usr/local/go/bin
 set -x PATH $PATH $HOME/.tmuxifier/bin
 set -x PATH $PATH $HOME/.local/azuredatastudio-linux-x64/bin
