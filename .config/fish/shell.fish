@@ -15,6 +15,7 @@ set -x PATH $PATH /opt/nvim-linux-x86_64/bin
 set -x PATH $PATH /usr/local/go/bin
 set -x PATH $PATH $HOME/.tmuxifier/bin
 set -x PATH $PATH $HOME/.local/azuredatastudio-linux-x64/bin
+set -x PATH $PATH $HOME/.local/share/nvim/mason/bin
 
 # oh-my-posh initialization
 oh-my-posh init fish --config ~/.config/oh-my-posh/catppuccin.omp.json | source
