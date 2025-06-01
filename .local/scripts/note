@@ -1,0 +1,30 @@
+#!/bin/bash
+
+NOTES_DIR="$HOME/notes"
+DEFAULT_SUBDIR="quick-notes"
+EDITOR="nvim"
+
+# Get the first argument as the note name (or use today's date)
+NOTE_NAME="$1"
+if [ -z "$NOTE_NAME" ]; then
+  NOTE_NAME="$(date +%F)"  # e.g., 2025-05-30
+fi
+
+# Optional: support subdirectories like `note work/project-x`
+SUBDIR="$2"
+if [ -z "$SUBDIR" ]; then
+  SUBDIR="$DEFAULT_SUBDIR"
+fi
+
+# Ensure the subdir exists
+mkdir -p "$NOTES_DIR/$SUBDIR"
+
+# Final note path
+NOTE_PATH="$NOTES_DIR/$SUBDIR/$NOTE_NAME.md"
+
+# Open in nvim
+cd $NOTES_DIR
+$EDITOR "$NOTE_PATH"
+
+# Back to current folder
+cd ~

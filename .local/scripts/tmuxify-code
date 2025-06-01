@@ -4,7 +4,7 @@ if test (count $argv) -eq 1
     set selected $argv[1]
 else
     # Search for directories in ~/code (customize paths as needed)
-    set selected (find ~/Coding ~/.config ~/dotfiles -type d -not -path "*/.git/*" \
+    set selected (find ~/coding ~/notes ~/.config ~/dotfiles -type d -not -path "*/.git/*" \
         -not -path "*/node_modules/*" \
         -not -path "*/bin/*" \
         -not -path "*/cache/*" \
