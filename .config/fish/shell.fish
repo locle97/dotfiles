@@ -5,6 +5,7 @@ set -x HISTSIZE 32768
 set -x HISTFILESIZE $HISTSIZE
 set fish_greeting
 set -gx EDITOR nvim
+set -gx NODE_CONFIG --max-old-space-size=4096
 
 # Path settings
 set -x PATH $HOME/.local/bin $PATH $HOME/.dotnet/tools
