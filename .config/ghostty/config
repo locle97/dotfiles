@@ -13,4 +13,5 @@ window-padding-x = 10
 window-padding-y = 10
 maximize = true
 
-background-opacity = 0.90
+background-opacity = 0.95
+keybind = shift+enter=text:\x1b\r
