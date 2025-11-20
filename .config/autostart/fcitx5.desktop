@@ -1,8 +1,0 @@
-[Desktop Entry]
-Type=Application
-Exec=fcitx5
-Hidden=false
-NoDisplay=true
-X-GNOME-Autostart-enabled=true
-Name=FCITX5
-Comment=Start FCITX5 at login
