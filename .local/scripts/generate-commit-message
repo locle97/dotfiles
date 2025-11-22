@@ -63,25 +63,25 @@ $recent_commits
 
 **Example Output (THIS IS THE EXACT FORMAT YOU MUST FOLLOW):**
 
-feat(hypr): add Ctrl+R and Ctrl+W passthrough keybindings
-fix(hypr): resolve keybind conflict between close window and Ctrl+W
-refactor(hypr): remap close window to Super+Shift+W for better compatibility
-feat(hypr): enable browser-style shortcuts with Ctrl+R and Ctrl+W support
-chore(hypr): update keybind configuration for improved workflow
-fix(config): prevent Super+W conflict with application shortcuts
-feat(hypr): add refresh and close tab shortcuts to user keybinds
-refactor(hypr): improve keybind organization to support passthrough shortcuts
-fix(hypr): change close window shortcut to avoid application conflicts
-feat(config): enable native application shortcuts with new passthrough bindings
+1. feat(hypr): add Ctrl+R and Ctrl+W passthrough keybindings
+2. fix(hypr): resolve keybind conflict between close window and Ctrl+W
+3. refactor(hypr): remap close window to Super+Shift+W for better compatibility
+4. feat(hypr): enable browser-style shortcuts with Ctrl+R and Ctrl+W support
+5. chore(hypr): update keybind configuration for improved workflow
+6. fix(config): prevent Super+W conflict with application shortcuts
+7. feat(hypr): add refresh and close tab shortcuts to user keybinds
+8. refactor(hypr): improve keybind organization to support passthrough shortcuts
+9. fix(hypr): change close window shortcut to avoid application conflicts
+10. feat(config): enable native application shortcuts with new passthrough bindings
 
 **CRITICAL OUTPUT INSTRUCTIONS:**
 
 - Output EXACTLY 10 lines
-- Each line is ONE complete commit message
-- Each message MUST be 72 characters or less
-- NO numbers, NO bullet points, NO dashes, NO blank lines between messages
+- Each line MUST start with a number followed by a period and space: "1. ", "2. ", etc.
+- Each message MUST be 72 characters or less (excluding the number prefix)
+- NO bullet points, NO dashes, NO blank lines between messages
 - NO explanations, NO markdown formatting, NO code blocks
-- Just raw commit messages, one per line
+- Just numbered commit messages, one per line
 - Follow the conventional commits format strictly
 - Each message must capture ALL changes, not individual files
 - Keep messages concise - use abbreviations if needed to stay under 72 chars
