@@ -38,7 +38,7 @@ end
 
 function __commit_msg_fzf
     # Pick a message using your existing script + fzf
-    set -l msg (generate-commit-message | fzf --height=40% --border=rounded --prompt="Select commit message: " --header="AI Commit Generation")
+    set -l msg (generate-commit-message | fzf --height=40% --border=rounded --prompt="Select commit message: " --header="AI Commit Generation" --layout=reverse)
 
     # If nothing selected, do nothing
     test -n "$msg"; or return
