@@ -37,11 +37,11 @@ function nvim_live_grep
 end
 
 if status is-interactive
-    bind \cf bind_tmuxify_code
+    bind \cr bind_tmuxify_code
 
     # Binding ctrl P to quickly run command nvim (fzf)
     bind \cp 'fzf --preview "batcat --style=numbers --color=always {}" | xargs -r nvim'
 
     # Binding ctrl shift F to grep search content and open in nvim with Telescope
-    bind \cF nvim_live_grep
+    bind \cf nvim_live_grep
 end
