@@ -1,0 +1,138 @@
+#!/usr/bin/env bash
+
+# Generate AI-powered PR summary with title and description
+
+# Get the current branch
+current_branch=$(git branch --show-current)
+
+# Determine the base branch (default to main, then master, then the remote's default branch)
+base_branch="${1:-main}"
+
+# Check if base branch exists, if not try master
+if ! git rev-parse --verify "$base_branch" &>/dev/null; then
+    base_branch="master"
+    if ! git rev-parse --verify "$base_branch" &>/dev/null; then
+        echo "Error: Could not determine base branch. Please specify it as an argument."
+        echo "Usage: generate-pr-summary [base-branch]"
+        exit 1
+    fi
+fi
+
+# Check if current branch is the same as base branch
+if [ "$current_branch" = "$base_branch" ]; then
+    echo "Error: You are currently on the base branch ($base_branch)."
+    echo "Please switch to a feature branch first."
+    exit 1
+fi
+
+# Get the diff summary (files changed)
+files_changed=$(git diff --name-status "$base_branch"..."$current_branch")
+
+# Check if there are any changes
+if [ -z "$files_changed" ]; then
+    echo "No changes found between $current_branch and $base_branch"
+    exit 1
+fi
+
+# Build a summary of changes per file
+changes_summary=""
+while IFS=$'\t' read -r status file; do
+    case "$status" in
+        A)
+            changes_summary+="- Added: $file\n"
+            ;;
+        M)
+            changes_summary+="- Modified: $file\n"
+            ;;
+        D)
+            changes_summary+="- Deleted: $file\n"
+            ;;
+        R*)
+            # Renamed files
+            old_file=$(echo "$file" | cut -f1)
+            new_file=$(echo "$file" | cut -f2)
+            changes_summary+="- Renamed: $old_file → $new_file\n"
+            ;;
+        *)
+            changes_summary+="- Changed: $file (status: $status)\n"
+            ;;
+    esac
+done <<< "$files_changed"
+
+# Get commit messages in this branch
+commit_messages=$(git log --pretty=format:'- %s' "$base_branch".."$current_branch")
+
+# Get the actual diff stats
+diff_stats=$(git diff --stat "$base_branch"..."$current_branch")
+
+# Show processing indicator
+echo "🤖 Generating PR summary for: $current_branch → $base_branch"
+echo ""
+
+# Generate PR summary
+claude -p "Generate a Pull Request summary based on the following information.
+
+**Current Branch:** $current_branch
+**Base Branch:** $base_branch
+
+**Files Changed:**
+
+$changes_summary
+
+**Commits in This Branch:**
+
+$commit_messages
+
+**Diff Statistics:**
+
+\`\`\`
+$diff_stats
+\`\`\`
+
+**Requirements:**
+
+1. **Title Format:** Write a clear, concise PR title (max 72 characters)
+   - Follow format: \`<type>(<scope>): <description>\` OR just \`<description>\`
+   - Focus on the main purpose/impact of the PR
+   - Types: feat, fix, refactor, docs, test, chore, perf, ci, build
+
+2. **Description Format:** Write a detailed markdown description with these sections:
+   - **Summary:** 2-3 sentences explaining what this PR does and why
+   - **Changes:** Bullet list of key changes (focus on user impact, not implementation)
+   - **Testing:** How these changes were tested (if applicable)
+   - **Notes:** Any additional context, breaking changes, or migration notes (if applicable)
+
+**Example Output Format:**
+
+## Title
+feat(hypr): add browser-style keybindings support
+
+## Description
+### Summary
+This PR adds support for browser-style shortcuts (Ctrl+R, Ctrl+W) in Hyprland by implementing passthrough keybindings and remapping conflicting window management shortcuts.
+
+### Changes
+- Added Ctrl+R and Ctrl+W passthrough keybindings for browser compatibility
+- Remapped close window from Super+W to Super+Shift+W to avoid conflicts
+- Updated user keybind configuration to support native application shortcuts
+- Improved keybind organization for better workflow integration
+
+### Testing
+- Tested Ctrl+R refresh in browser windows
+- Verified Ctrl+W closes tabs in browsers without closing the window
+- Confirmed Super+Shift+W still closes windows as expected
+
+### Notes
+This change improves compatibility with web applications and terminals that use Ctrl+W for tab management.
+
+**CRITICAL OUTPUT INSTRUCTIONS:**
+
+- Output EXACTLY two sections: \"## Title\" and \"## Description\"
+- Title section contains ONE line with the PR title
+- Description section contains markdown-formatted content
+- Use proper markdown formatting (headers, bullet points, bold)
+- Focus on WHAT and WHY, not HOW
+- Be concise but informative
+- NO extra explanations outside the two sections
+
+Generate the PR summary now:"
