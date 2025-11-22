@@ -39,7 +39,7 @@ done <<< "$staged_files"
 # Get recent commits for context
 recent_commits=$(git log -n 10 --pretty=format:'%h %s')
 
-claude -p "Generate exactly 10 commit messages based on the following staged changes.
+claude --model "Haiku" -p "Generate exactly 10 commit messages based on the following staged changes.
 
 **Staged Files Summary:**
 

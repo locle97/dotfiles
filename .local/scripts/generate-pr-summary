@@ -65,12 +65,8 @@ commit_messages=$(git log --pretty=format:'- %s' "$base_branch".."$current_branc
 # Get the actual diff stats
 diff_stats=$(git diff --stat "$base_branch"..."$current_branch")
 
-# Show processing indicator
-echo "🤖 Generating PR summary for: $current_branch → $base_branch"
-echo ""
-
 # Generate PR summary
-claude -p "Generate a Pull Request summary based on the following information.
+claude --model "Haiku" -p "Generate a Pull Request summary based on the following information.
 
 **Current Branch:** $current_branch
 **Base Branch:** $base_branch
