@@ -1,0 +1,89 @@
+#!/usr/bin/env bash
+
+# Generate AI-powered commit messages based on staged changes
+
+# Get list of staged files with their status
+staged_files=$(git diff --cached --name-status)
+
+# Check if there are any staged files
+if [ -z "$staged_files" ]; then
+    echo "No staged files found. Please stage your changes first."
+    exit 1
+fi
+
+# Build a summary of changes per file
+changes_summary=""
+while IFS=$'\t' read -r status file; do
+    case "$status" in
+        A)
+            changes_summary+="- Added: $file\n"
+            ;;
+        M)
+            changes_summary+="- Modified: $file\n"
+            ;;
+        D)
+            changes_summary+="- Deleted: $file\n"
+            ;;
+        R*)
+            # Renamed files (format: R100 old_name new_name)
+            old_file=$(echo "$file" | cut -f1)
+            new_file=$(echo "$file" | cut -f2)
+            changes_summary+="- Renamed: $old_file → $new_file\n"
+            ;;
+        *)
+            changes_summary+="- Changed: $file (status: $status)\n"
+            ;;
+    esac
+done <<< "$staged_files"
+
+# Get recent commits for context
+recent_commits=$(git log -n 10 --pretty=format:'%h %s')
+
+claude --model "Haiku" -p "Generate exactly 10 commit messages based on the following staged changes.
+
+**Staged Files Summary:**
+
+$changes_summary
+
+**Recent Commits on Repo for Reference:**
+
+\`\`\`
+$recent_commits
+\`\`\`
+
+**Requirements:**
+
+1. **Format:** Each commit message MUST follow: \`<type>(<scope>): <description>\`
+2. **Length:** Maximum 72 characters per message (this is CRITICAL)
+3. **Types:** feat, fix, refactor, style, docs, test, chore, perf, ci, build
+4. **Scope:** Use short module/component name when relevant (hypr, config, waybar, scripts)
+5. **Description:** Concise, focus on WHAT changed and WHY (user impact), not implementation
+6. **Diversity:** Each message should offer a different perspective or abstraction level
+7. **Quality:** Aim for the best possible message, not average - be bold and synthesize to higher level
+
+**Example Output (THIS IS THE EXACT FORMAT YOU MUST FOLLOW):**
+
+1. feat(hypr): add Ctrl+R and Ctrl+W passthrough keybindings
+2. fix(hypr): resolve keybind conflict between close window and Ctrl+W
+3. refactor(hypr): remap close window to Super+Shift+W for better compatibility
+4. feat(hypr): enable browser-style shortcuts with Ctrl+R and Ctrl+W support
+5. chore(hypr): update keybind configuration for improved workflow
+6. fix(config): prevent Super+W conflict with application shortcuts
+7. feat(hypr): add refresh and close tab shortcuts to user keybinds
+8. refactor(hypr): improve keybind organization to support passthrough shortcuts
+9. fix(hypr): change close window shortcut to avoid application conflicts
+10. feat(config): enable native application shortcuts with new passthrough bindings
+
+**CRITICAL OUTPUT INSTRUCTIONS:**
+
+- Output EXACTLY 10 lines
+- Each line MUST start with a number followed by a period and space: "1. ", "2. ", etc.
+- Each message MUST be 72 characters or less (excluding the number prefix)
+- NO bullet points, NO dashes, NO blank lines between messages
+- NO explanations, NO markdown formatting, NO code blocks
+- Just numbered commit messages, one per line
+- Follow the conventional commits format strictly
+- Each message must capture ALL changes, not individual files
+- Keep messages concise - use abbreviations if needed to stay under 72 chars
+
+Here are your 10 commit messages now:"
