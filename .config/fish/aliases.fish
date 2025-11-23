@@ -53,8 +53,6 @@ if status is-interactive
     # Binding ctrl P to quickly run command nvim (fzf)
     bind \cp 'fzf --preview "batcat --style=numbers --color=always {}" | xargs -r nvim'
 
-    # Binding ctrl F to grep search content and open in nvim with Telescope
-    bind \cf nvim_live_grep
-
-    bind \cg __commit_msg_fzf
+    # Binding ctrl shift F to grep search content and open in nvim with Telescope
+    bind \cg nvim_live_grep
 end
