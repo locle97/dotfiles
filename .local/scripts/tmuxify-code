@@ -24,18 +24,22 @@ set selected_name (basename "$selected" | string replace -a '.' '_')
 # Check if tmux is running
 set tmux_running (pgrep tmux)
 
-# If not in tmux and tmux isn't running, create a new session with two windows
+# If not in tmux and tmux isn't running, create a new session with three windows
 if test -z "$TMUX" -a -z "$tmux_running"
     tmux new-session -s $selected_name -c $selected -n "editor"\; \
         new-window -t "$selected_name" -c $selected -n "shell"\; \
+        new-window -t "$selected_name" -c $selected -n "lazygit"\; \
+        send-keys -t "$selected_name:lazygit" "lazygit" Enter\; \
         select-window -t "$selected_name:1"
     exit 0
 end
 
-# If session doesn't exist, create it in detached mode with two windows
+# If session doesn't exist, create it in detached mode with three windows
 if not tmux has-session -t=$selected_name 2>/dev/null
     tmux new-session -ds $selected_name -c $selected -n "editor"
     tmux new-window -t "$selected_name" -c $selected -n "shell"
+    tmux new-window -t "$selected_name" -c $selected -n "lazygit"
+    tmux send-keys -t "$selected_name:lazygit" "lazygit" Enter
     tmux select-window -t "$selected_name:1"
 end
 
