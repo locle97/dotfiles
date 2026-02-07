@@ -1,6 +1,6 @@
 
 # Theme
-theme = catppuccin-mocha
+theme = catppuccin-mocha.conf
 
 # Font
 font-family = SauceCodePro Nerd Font
