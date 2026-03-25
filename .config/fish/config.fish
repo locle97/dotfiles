@@ -6,3 +6,6 @@ if status is-interactive
     source ~/.secrets
 end
 
+
+# opencode
+fish_add_path /home/locle97/.opencode/bin
