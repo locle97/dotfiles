@@ -2,7 +2,6 @@
 
 # Generate AI-powered commit messages based on staged changes
 
-# Get list of staged files with their status
 staged_files=$(git diff --cached --name-status)
 
 if [ -z "$staged_files" ]; then
@@ -12,79 +11,47 @@ fi
 
 echo "⏳ Generating commit messages..." >&2
 
-# Build a summary of changes per file
-changes_summary=""
-while IFS=$'\t' read -r status file; do
-    case "$status" in
-        A)
-            changes_summary+="- Added: $file\n"
-            ;;
-        M)
-            changes_summary+="- Modified: $file\n"
-            ;;
-        D)
-            changes_summary+="- Deleted: $file\n"
-            ;;
-        R*)
-            # Renamed files (format: R100 old_name new_name)
-            old_file=$(echo "$file" | cut -f1)
-            new_file=$(echo "$file" | cut -f2)
-            changes_summary+="- Renamed: $old_file → $new_file\n"
-            ;;
-        *)
-            changes_summary+="- Changed: $file (status: $status)\n"
-            ;;
-    esac
-done <<< "$staged_files"
+# Full diff for accurate content analysis
+diff_content=$(git diff --cached)
 
-# Get recent commits for context
+# Recent commits for style/scope context
 recent_commits=$(git log -n 10 --pretty=format:'%h %s')
 
-claude --model "Haiku" -p "Generate exactly 10 commit messages based on the following staged changes.
+claude --model "claude-haiku-4-5-20251001" -p "You are an expert developer writing git commit messages.
 
-**Staged Files Summary:**
+Inspect the staged changes below and generate exactly 5 commit message options following conventional commits format.
 
-$changes_summary
+**Staged Diff:**
 
-**Recent Commits on Repo for Reference:**
+\`\`\`diff
+$diff_content
+\`\`\`
+
+**Recent Commits (for scope/style reference):**
 
 \`\`\`
 $recent_commits
 \`\`\`
 
-**Requirements:**
+**Rules:**
+- Format: \`type(scope): short description\` (subject max 72 chars)
+- Types: feat, fix, refactor, style, docs, test, chore, perf
+- Scope: short module/component name (e.g. hypr, waybar, scripts, lazygit)
+- Be specific about WHAT changed and WHY — not just \"update files\"
+- No period at end of subject line
+- Each option should offer a different angle or abstraction level
+- Capture ALL changes holistically, not per-file
 
-1. **Format:** Each commit message MUST follow: \`<type>(<scope>): <description>\`
-2. **Length:** Maximum 72 characters per message (this is CRITICAL)
-3. **Types:** feat, fix, refactor, style, docs, test, chore, perf, ci, build
-4. **Scope:** Use short module/component name when relevant (hypr, config, waybar, scripts)
-5. **Description:** Concise, focus on WHAT changed and WHY (user impact), not implementation
-6. **Diversity:** Each message should offer a different perspective or abstraction level
-7. **Quality:** Aim for the best possible message, not average - be bold and synthesize to higher level
+**Output format (EXACT — no deviations):**
 
-**Example Output (THIS IS THE EXACT FORMAT YOU MUST FOLLOW):**
+1. type(scope): description
+2. type(scope): description
+3. type(scope): description
+4. type(scope): description
+5. type(scope): description
 
-1. feat(hypr): add Ctrl+R and Ctrl+W passthrough keybindings
-2. fix(hypr): resolve keybind conflict between close window and Ctrl+W
-3. refactor(hypr): remap close window to Super+Shift+W for better compatibility
-4. feat(hypr): enable browser-style shortcuts with Ctrl+R and Ctrl+W support
-5. chore(hypr): update keybind configuration for improved workflow
-6. fix(config): prevent Super+W conflict with application shortcuts
-7. feat(hypr): add refresh and close tab shortcuts to user keybinds
-8. refactor(hypr): improve keybind organization to support passthrough shortcuts
-9. fix(hypr): change close window shortcut to avoid application conflicts
-10. feat(config): enable native application shortcuts with new passthrough bindings
+- Output EXACTLY 5 lines
+- Each line starts with \"N. \" (number, period, space)
+- No blank lines, no explanations, no markdown, no code fences
 
-**CRITICAL OUTPUT INSTRUCTIONS:**
-
-- Output EXACTLY 10 lines
-- Each line MUST start with a number followed by a period and space: "1. ", "2. ", etc.
-- Each message MUST be 72 characters or less (excluding the number prefix)
-- NO bullet points, NO dashes, NO blank lines between messages
-- NO explanations, NO markdown formatting, NO code blocks
-- Just numbered commit messages, one per line
-- Follow the conventional commits format strictly
-- Each message must capture ALL changes, not individual files
-- Keep messages concise - use abbreviations if needed to stay under 72 chars
-
-Here are your 10 commit messages now:"
+Here are your 5 commit messages:"
