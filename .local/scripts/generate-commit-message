@@ -11,21 +11,12 @@ fi
 
 echo "⏳ Generating commit messages..." >&2
 
-# Full diff for accurate content analysis
-diff_content=$(git diff --cached)
-
 # Recent commits for style/scope context
 recent_commits=$(git log -n 10 --pretty=format:'%h %s')
 
-claude --model "claude-haiku-4-5-20251001" -p "You are an expert developer writing git commit messages.
+claude --model "claude-haiku-4-5-20251001" --allowedTools "Bash(git diff --cached)" -p "You are an expert developer writing git commit messages.
 
-Inspect the staged changes below and generate exactly 5 commit message options following conventional commits format.
-
-**Staged Diff:**
-
-\`\`\`diff
-$diff_content
-\`\`\`
+Run \`git diff --cached\` to inspect the staged changes, then generate exactly 5 commit message options following conventional commits format.
 
 **Recent Commits (for scope/style reference):**
 
