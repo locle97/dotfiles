@@ -5,11 +5,12 @@
 # Get list of staged files with their status
 staged_files=$(git diff --cached --name-status)
 
-# Check if there are any staged files
 if [ -z "$staged_files" ]; then
-    echo "No staged files found. Please stage your changes first."
+    echo "No staged files found. Please stage your changes first." >&2
     exit 1
 fi
+
+echo "⏳ Generating commit messages..." >&2
 
 # Build a summary of changes per file
 changes_summary=""
