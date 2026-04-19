@@ -1,6 +1,6 @@
 customCommands:
   - key: "<c-a>"
     context: "files"
-    command: 'bash -c ''msg=$(generate-commit-message | sed "s/^[0-9]*\\. //" | fzf --prompt="Commit> " --height=50% --border --reverse) && git commit -m "$msg"'''
+    command: 'bash -c ''msg=$(generate-commit-message | sed "s/^[0-9]*\\. //" | fzf --disabled --no-sort --prompt="Commit> " --height=50% --border --reverse --bind=j:down,k:up) && git commit -m "$msg"'''
     description: "Generate AI commit message"
     output: terminal
